@@ -1,0 +1,56 @@
+﻿<Window x:Class="NISLTracker.DataWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NISLTracker"
+        mc:Ignorable="d" Height="600" Width="800" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Title="物资信息">
+    <Window.Background>
+        <ImageBrush ImageSource="Source/background.jpg"/>
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+        <Label Content="欢迎使用NISL Tracker" HorizontalAlignment="Stretch" Margin="0,10,0,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFFFFFFF" FontSize="32" FontWeight="Bold"/>
+        <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <RadioButton x:Name="rdbAllStuffs" Content="全部物资" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="18" Foreground="#FFFFFFFF" FontWeight="Bold" Checked="rdbAllStuffs_Checked"/>
+            <RadioButton x:Name="rdbMyStuffs" Content="我的物资" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="18" Foreground="#FFFFFFFF" FontWeight="Bold" Checked="rdbMyStuffs_Checked"/>
+            <RadioButton x:Name="rdbBorrowedStuffs" Content="借入物资" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="18" Foreground="#FFFFFFFF" FontWeight="Bold" Checked="rdbBorrowedStuffs_Checked"/>
+        </Grid>
+        <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="2" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="txtSearchInput" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="20" VerticalContentAlignment="Center" FontWeight="Bold" TabIndex="1"/>
+            <Button x:Name="btnSearch" Content="搜索" Grid.Column="2" HorizontalAlignment="Stretch" Margin="5,0,0,0" VerticalAlignment="Center" Height="34" FontSize="16" FontWeight="Bold" IsDefault="True" TabIndex="2"/>
+        </Grid>
+        <DataGrid x:Name="dgrdStuffInfo" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="3" VerticalAlignment="Stretch"
+                  CanUserSortColumns="False" IsReadOnly="True"
+                  CanUserResizeColumns="False" CanUserResizeRows="False"  SelectionMode="Single"
+                  CanUserReorderColumns="False" CanUserAddRows="False" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionChanged="dgrdStuffInfo_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="StuffId" Width="*" Binding="{Binding StuffId}"/>
+                <DataGridTextColumn Header="StuffName"  Width="*"  Binding="{Binding StuffName}"/>
+                <DataGridTextColumn Header="ValueOfAssessment"  Width="*"  Binding="{Binding ValueOfAssessment}"/>
+                <DataGridTextColumn Header="State"  Width="*"  Binding="{Binding State}"/>
+                <DataGridTextColumn Header="Owner"  Width="*"  Binding="{Binding Owner}"/>
+                <DataGridTextColumn Header="CurrentHolder"  Width="*"  Binding="{Binding CurrentHolder}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>
