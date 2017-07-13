@@ -45,7 +45,7 @@ namespace NISLTracker
                 {
                     MessageBox.Show("物资归还成功！", "归还成功", MessageBoxButton.OK, MessageBoxImage.None);
                     Close();
-                    parentWindow.UpdateDataGrid("Return", "Holding", owner.UserName);
+                    parentWindow.UpdateDataGrid("Return", null, "Holding", owner.UserName);
                 }
                 else
                 {

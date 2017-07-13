@@ -71,6 +71,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddStuffWindow.xaml.cs">
+      <DependentUpon>AddStuffWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BorrowWindow.xaml.cs">
       <DependentUpon>BorrowWindow.xaml</DependentUpon>
     </Compile>
@@ -79,6 +82,9 @@
     </Compile>
     <Compile Include="DBManager.cs" />
     <Compile Include="Encrypt.cs" />
+    <Compile Include="RemoveStuffWindow.xaml.cs">
+      <DependentUpon>RemoveStuffWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReturnWindow.xaml.cs">
       <DependentUpon>ReturnWindow.xaml</DependentUpon>
     </Compile>
@@ -86,6 +92,10 @@
     <Compile Include="StuffDAO.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserDAO.cs" />
+    <Page Include="AddStuffWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BorrowWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -106,6 +116,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RemoveStuffWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ReturnWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -159,6 +173,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Source\background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Source\add.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

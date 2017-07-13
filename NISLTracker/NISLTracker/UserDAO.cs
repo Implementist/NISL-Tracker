@@ -92,5 +92,89 @@ namespace NISLTracker
                 DBManager.CloseAll(reader, command, connection);
             }
         }
+
+        public static User QueryTeacherByLaboratory(int Laboratory)
+        {
+            MySqlConnection connection = null;
+            MySqlCommand command = null;
+            MySqlDataReader reader = null;
+            User user = null;
+            try
+            {
+                connection = DBManager.GetConnection();
+
+                StringBuilder sqlExpression = new StringBuilder();
+                sqlExpression.Append("SELECT * FROM user WHERE ");
+                sqlExpression.Append("Identity=@Identity AND Laboratory=@Laboratory");
+
+                command = new MySqlCommand(sqlExpression.ToString(), connection);
+                command.Parameters.AddWithValue("@Identity", "Teacher");
+                command.Parameters.AddWithValue("@Laboratory", Laboratory);
+
+                reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    user = new User()
+                    {
+                        UserName = reader.GetString("UserName"),
+                        AuthorizationCode = reader.GetString("AuthorizationCode"),
+                        SecurityStamp = reader.GetString("SecurityStamp"),
+                        Identity = reader.GetString("Identity"),
+                        Laboratory = reader.GetInt32("Laboratory")
+                    };
+                }
+                return user;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                DBManager.CloseAll(reader, command, connection);
+            }
+        }
+
+        public static IList<User> QueryAll()
+        {
+            MySqlConnection connection = null;
+            MySqlCommand command = null;
+            MySqlDataReader reader = null;
+            IList<User> users = new List<User>();
+            try
+            {
+                connection = DBManager.GetConnection();
+
+                StringBuilder sqlExpression = new StringBuilder();
+                sqlExpression.Append("SELECT * FROM user");
+
+                command = new MySqlCommand(sqlExpression.ToString(), connection);
+
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    User user = new User()
+                    {
+                        UserName = reader.GetString("UserName"),
+                        AuthorizationCode = reader.GetString("AuthorizationCode"),
+                        SecurityStamp = reader.GetString("SecurityStamp"),
+                        Identity = reader.GetString("Identity"),
+                        Laboratory = reader.GetInt32("Laboratory")
+                    };
+                    users.Add(user);
+                }
+                return users;
+            }
+            catch (Exception)
+            {
+                return users;
+            }
+            finally
+            {
+                DBManager.CloseAll(reader, command, connection);
+            }
+        }
     }
 }

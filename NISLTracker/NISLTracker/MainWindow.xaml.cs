@@ -79,7 +79,7 @@ namespace NISLTracker
         {
             if (!txtUserName.Text.Equals("") && !txtAuthorizationCode.Password.Equals(""))
             {
-                User user = UserDAO.QueryUserByUserName(txtUserName.Text.ToString());
+                User user = App.GetUserByUserName(txtUserName.Text.ToString());
                 string ciphertext = Encrypt.GetCiphertext(txtAuthorizationCode.Password, user.SecurityStamp);
                 bool verifyResult = null != user && user.AuthorizationCode == ciphertext;
                 if (verifyResult)
