@@ -1,0 +1,42 @@
+﻿<Window x:Class="NISLTracker.AddStuffWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NISLTracker"
+        mc:Ignorable="d"
+        Title="添加物资" Height="315" Width="420" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="Window_Loaded">
+    <Window.Background>
+        <ImageBrush ImageSource="Source/background.jpg"/>
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Label Content="物资名称：" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left" Foreground="#FFFFFFFF" FontWeight="Bold" FontSize="16" Margin="10,0,0,0"/>
+            <TextBox x:Name="txtStuffName" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="" VerticalAlignment="Center" FontSize="16" Margin="0,0,10,0" TabIndex="1"/>
+            <Label Grid.Row="1" Content="物资估值：" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left" Foreground="#FFFFFFFF" FontWeight="Bold" FontSize="16" Margin="10,0,0,0"/>
+            <TextBox x:Name="txtValueOfAssessment" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="" VerticalAlignment="Center" FontSize="16" Margin="0,0,10,0" TabIndex="2"/>
+            <Label Grid.Row="2" Content="拥有者：" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left" Foreground="#FFFFFFFF" FontWeight="Bold" FontSize="16" Margin="10,0,0,0"/>
+            <TextBox x:Name="txtOwner" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="" VerticalAlignment="Center" FontSize="16" IsEnabled="False" Margin="0,0,10,0"/>
+            <Label Grid.Row="3" Content="主管老师授权码：" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left" Foreground="#FFFFFFFF" FontWeight="Bold" FontSize="16" Margin="0"/>
+            <PasswordBox x:Name="txtHeadTeacherAuthorizationCode" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" Password="" VerticalAlignment="Center" FontSize="18" Margin="0,0,10,0" TabIndex="3"/>
+        </Grid>
+        <Label Content="添加物资" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFFFFFFF" FontWeight="Bold" FontSize="20"/>
+        <Button x:Name="btnAddStuff" Content="添加" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch" FontSize="18" Margin="10,0,10,15" FontWeight="Bold" IsDefault="True" TabIndex="4" Click="btnAddStuff_Click"/>
+
+    </Grid>
+</Window>

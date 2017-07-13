@@ -14,20 +14,20 @@ using System.Windows.Shapes;
 namespace NISLTracker
 {
     /// <summary>
-    /// BorrowWindow.xaml 的交互逻辑
+    /// RemoveStuffWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class BorrowWindow : Window
+    public partial class RemoveStuffWindow : Window
     {
-        private DataWindow parentWindow; 
+        private DataWindow parentWindow;
         private Stuff stuff;
-        private User owner;
+        private User headTeacher;
         private User user;
 
-        public BorrowWindow(DataWindow ParentWindow, Stuff Stuff, User Owner, User User)
+        public RemoveStuffWindow(DataWindow ParentWindow, Stuff Stuff, User HeadTeacher, User User)
         {
             parentWindow = ParentWindow;
             stuff = Stuff;
-            owner = Owner;
+            headTeacher = HeadTeacher;
             user = User;
             InitializeComponent();
             txtStuffName.Text = stuff.StuffName;
@@ -35,21 +35,26 @@ namespace NISLTracker
             txtOwner.Text = stuff.Owner;
         }
 
-        private void btnBorrow_Click(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            string ciphertext = Encrypt.GetCiphertext(txtOwnerAuthorizationCode.Password, owner.SecurityStamp);
-            if (ciphertext.Equals(owner.AuthorizationCode))
+            Keyboard.Focus(txtHeadTeacherAuthorizationCode);
+        }
+
+        private void btnRemoveStuff_Click(object sender, RoutedEventArgs e)
+        {
+            string ciphertext = Encrypt.GetCiphertext(txtHeadTeacherAuthorizationCode.Password, headTeacher.SecurityStamp);
+            if (ciphertext.Equals(headTeacher.AuthorizationCode))
             {
-                int result = StuffDAO.UpdateStateAndCurrentHolderByStuffId(stuff.StuffId, "LentOut", user.UserName);
+                int result = StuffDAO.DeleteStuff(stuff.StuffId);
                 if (result == 1)
                 {
-                    MessageBox.Show("物资借入成功！", "借入成功", MessageBoxButton.OK, MessageBoxImage.None);
+                    MessageBox.Show("物资删除成功！", "删除成功", MessageBoxButton.OK, MessageBoxImage.None);
                     Close();
-                    parentWindow.UpdateDataGrid("Borrow", null, "LentOut", user.UserName);
+                    parentWindow.UpdateDataGrid("Remove", null, null, user.UserName);
                 }
                 else
-                { 
-                    MessageBox.Show("物资借入失败，请稍后重试。", "借入失败", MessageBoxButton.OK, MessageBoxImage.Error);
+                {
+                    MessageBox.Show("物资删除失败，请稍后重试。", "删除失败", MessageBoxButton.OK, MessageBoxImage.Error);
                     Close();
                 }
             }
@@ -57,11 +62,6 @@ namespace NISLTracker
             {
                 MessageBox.Show("验证失败，请检查您的授权码是否正确并重试。", "验证失败", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            Keyboard.Focus(txtOwnerAuthorizationCode);
         }
     }
 }

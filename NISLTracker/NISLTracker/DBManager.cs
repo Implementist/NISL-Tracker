@@ -8,7 +8,7 @@ namespace NISLTracker
 {
     class DBManager
     {
-        private const string CONNECTION_STRING = "Host=47.94.200.146;UserId=root;Password=;Database=nisl_tracker";
+        private const string CONNECTION_STRING = "Host=47.94.200.146;UserId=root;Password=;Database=nisl_tracker;Charset=utf8";
 
         /// <summary>
         /// 获取数据库连接
