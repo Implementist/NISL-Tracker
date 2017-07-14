@@ -50,7 +50,7 @@ namespace NISLTracker
                 {
                     MessageBox.Show("物资删除成功！", "删除成功", MessageBoxButton.OK, MessageBoxImage.None);
                     Close();
-                    parentWindow.UpdateDataGrid("Remove", null, null, user.UserName);
+                    parentWindow.UpdateDataGrid("Remove", null, null, null);
                 }
                 else
                 {
