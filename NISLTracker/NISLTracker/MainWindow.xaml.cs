@@ -30,6 +30,11 @@ namespace NISLTracker
             InitializeComponent();
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Keyboard.Focus(txtUserName);
+        }
+
         /// <summary>
         /// 用户名输入框文本变化事件
         /// </summary>
@@ -89,19 +94,44 @@ namespace NISLTracker
                     Close();
                 }
                 else
-                {
                     MessageBox.Show("用户名或授权码错误。", "登入系统失败", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
             else
-            {
                 MessageBox.Show("用户名或授权码不能为空！", "空的用户名或授权码", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void panForget_MouseEnter(object sender, MouseEventArgs e)
         {
-            Keyboard.Focus(txtUserName);
+            imgForget.Source = new BitmapImage(new Uri("Source/forget_fill.png", UriKind.RelativeOrAbsolute));
+            lblForget.Foreground = new SolidColorBrush(Color.FromArgb(255, 99, 187, 243));
+        }
+
+        private void panForget_MouseLeave(object sender, MouseEventArgs e)
+        {
+            imgForget.Source = new BitmapImage(new Uri("Source/forget.png", UriKind.RelativeOrAbsolute));
+            lblForget.Foreground = new SolidColorBrush(Color.FromArgb(255, 128, 128, 128));
+        }
+
+        private void panForget_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            //TODO: 弹出修改授权码界面
+        }
+
+        private void panRegister_MouseEnter(object sender, MouseEventArgs e)
+        {
+            imgRegister.Source = new BitmapImage(new Uri("Source/register_fill.png", UriKind.RelativeOrAbsolute));
+            lblRegister.Foreground = new SolidColorBrush(Color.FromArgb(255, 99, 187, 243));
+        }
+
+        private void panRegister_MouseLeave(object sender, MouseEventArgs e)
+        {
+            imgRegister.Source = new BitmapImage(new Uri("Source/register.png", UriKind.RelativeOrAbsolute));
+            lblRegister.Foreground = new SolidColorBrush(Color.FromArgb(255, 128, 128, 128));
+        }
+
+        private void panRegister_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            //TODO: 弹出用户注册界面
         }
     }
 }

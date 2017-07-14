@@ -17,8 +17,7 @@
         <StackPanel HorizontalAlignment="Stretch" Grid.Row="0" Background="Transparent">
             <Image Source="Source/logo_and_slogan.png" HorizontalAlignment="Center" Height="145" Margin="129.5,10"/>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Background="#FFFFFFFF">
-            <Grid Height="222">
+        <Grid HorizontalAlignment="Stretch" Grid.Row="1" Background="#FFFFFFFF">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="10*"/>
@@ -73,7 +72,20 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
+            <Grid HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch" Grid.ColumnSpan="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <DockPanel x:Name="panForget" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="4,0,0,4" Cursor="Hand" MouseEnter="panForget_MouseEnter" MouseLeave="panForget_MouseLeave" MouseUp="panForget_MouseUp">
+                    <Image x:Name="imgForget" HorizontalAlignment="Left" Height="30" VerticalAlignment="Center" Width="30" Source="Source/forget.png"/>
+                    <Label x:Name="lblForget" Content="忘记授权码" VerticalAlignment="Center" Foreground="#FF808080" FontWeight="Bold" FontSize="15"/>
+                </DockPanel>
+                <DockPanel x:Name="panRegister" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,4,4" Cursor="Hand" MouseEnter="panRegister_MouseEnter" MouseLeave="panRegister_MouseLeave" MouseUp="panRegister_MouseUp">
+                    <Image x:Name="imgRegister" HorizontalAlignment="Left" Height="30" VerticalAlignment="Center" Width="30" Source="Source/register.png"/>
+                    <Label x:Name="lblRegister" Content="注册账户" VerticalAlignment="Center" Foreground="#FF808080" FontWeight="Bold" FontSize="15"/>
+                </DockPanel>
             </Grid>
-        </StackPanel>
+        </Grid>
     </Grid>
 </Window>

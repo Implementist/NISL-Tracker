@@ -52,7 +52,7 @@ namespace NISLTracker
                 {
                     MessageBox.Show("物资添加成功！", "添加成功", MessageBoxButton.OK, MessageBoxImage.None);
                     Close();
-                    parentWindow.UpdateDataGrid("Add", stuff, "Holding", user.UserName);
+                    parentWindow.UpdateDataGrid("Add", stuff, null, null);
                 }
                 else
                 {
