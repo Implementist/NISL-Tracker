@@ -35,33 +35,32 @@ namespace NISLTracker
             txtOwner.Text = stuff.Owner;
         }
 
-        private void btnReturn_Click(object sender, RoutedEventArgs e)
-        {
-            string ciphertext = Encrypt.GetCiphertext(txtOwnerAuthorizationCode.Password, owner.SecurityStamp);
-            if (ciphertext.Equals(owner.AuthorizationCode))
-            {
-                int result = StuffDAO.UpdateStateAndCurrentHolderByStuffId(stuff.StuffId, "Holding", owner.UserName);
-                if (result == 1)
-                {
-                    MessageBox.Show("物资归还成功！", "归还成功", MessageBoxButton.OK, MessageBoxImage.None);
-                    Close();
-                    parentWindow.UpdateDataGrid("Return", null, null, null);
-                }
-                else
-                {
-                    MessageBox.Show("物资归还失败，请稍后重试。", "归还失败", MessageBoxButton.OK, MessageBoxImage.Error);
-                    Close();
-                }
-            }
-            else
-            {
-                MessageBox.Show("验证失败，请检查您的授权码是否正确并重试。","验证失败", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Keyboard.Focus(txtOwnerAuthorizationCode);
+        }
+
+        private void btnReturn_Click(object sender, RoutedEventArgs e)
+        {
+            string ciphertext = Encrypt.GetCiphertext(txtOwnerAuthorizationCode.Password, owner.SecurityStamp);
+            if (!ciphertext.Equals(owner.AuthorizationCode))
+            {
+                MessageBox.Show("验证失败，请检查您的授权码是否正确并重试。", "验证失败", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            int result = StuffDAO.UpdateStateAndCurrentHolderByStuffId(stuff.StuffId, "Holding", owner.UserName);
+            if (result == 1)
+            {
+                MessageBox.Show("物资归还成功！", "归还成功", MessageBoxButton.OK, MessageBoxImage.None);
+                Close();
+                parentWindow.UpdateDataGrid("Return", null, null, null);
+            }
+            else
+            {
+                MessageBox.Show("物资归还失败，请稍后重试。", "归还失败", MessageBoxButton.OK, MessageBoxImage.Error);
+                Close();
+            }
         }
     }
 }

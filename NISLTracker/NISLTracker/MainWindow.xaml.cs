@@ -85,8 +85,7 @@ namespace NISLTracker
             if (!txtUserName.Text.Equals("") && !txtAuthorizationCode.Password.Equals(""))
             {
                 User user = App.GetUserByUserName(txtUserName.Text.ToString());
-                string ciphertext = Encrypt.GetCiphertext(txtAuthorizationCode.Password, user.SecurityStamp);
-                bool verifyResult = null != user && user.AuthorizationCode == ciphertext;
+                bool verifyResult = null != user && user.AuthorizationCode.Equals(Encrypt.GetCiphertext(txtAuthorizationCode.Password, user.SecurityStamp));
                 if (verifyResult)
                 {
                     DataWindow dataWindow = new DataWindow(user);
@@ -114,7 +113,8 @@ namespace NISLTracker
 
         private void panForget_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            //TODO: 弹出修改授权码界面
+            ResetAuthCodeWindow resetAuthWindow = new ResetAuthCodeWindow();
+            resetAuthWindow.Show();
         }
 
         private void panRegister_MouseEnter(object sender, MouseEventArgs e)
@@ -131,7 +131,8 @@ namespace NISLTracker
 
         private void panRegister_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            //TODO: 弹出用户注册界面
+            RegisterWindow registerWindow = new RegisterWindow();
+            registerWindow.Show();
         }
     }
 }

@@ -57,37 +57,44 @@ namespace NISLTracker
             {
                 Stuff stuff = dgrdStuffInfo.SelectedItem as Stuff;
 
+                //如果物资处于可借状态——即： 1.用户处于所有物资界面；
+                //2.该物资当前被拥有者持有； 3.该物资的拥有者不是当前用户。
                 if ((bool)rdbAllStuffs.IsChecked && stuff.State.Equals("Holding") && !stuff.Owner.Equals(user.UserName))
                 {
                     User owner = App.GetUserByUserName(stuff.Owner);
                     BorrowWindow borrowWindow = new BorrowWindow(this, stuff, owner, user);
                     borrowWindow.Show();
                 }
+                //如果物资处于可还状态——即： 1.用户处于借入物资界面；
+                //2.该物资当前被借出； 3.该物资的当前持有者是当前用户。
                 else if ((bool)rdbBorrowedStuffs.IsChecked && stuff.State.Equals("LentOut") && stuff.CurrentHolder.Equals(user.UserName))
                 {
                     User owner = App.GetUserByUserName(stuff.Owner);
                     ReturnWindow returnWindow = new ReturnWindow(this, stuff, owner, user);
                     returnWindow.Show();
                 }
+                //如果物资处于可删除状态——即： 1.用户处于我的物资界面；
+                //2.该物资的拥有者不是当前用户。
                 else if ((bool)rdbMyStuffs.IsChecked && stuff.Owner.Equals(user.UserName))
                 {
-                    if (stuff.State.Equals("Holding"))
-                    {
-                        User headTeacher = App.GetTeacherByLaboratory(user.Laboratory);
-                        if (null != headTeacher)
-                        {
-                            RemoveStuffWindow removeStuffWindow = new RemoveStuffWindow(this, stuff, headTeacher, user);
-                            removeStuffWindow.Show();
-                        }
-                        else
-                        {
-                            MessageBox.Show("未查询到主管老师的相关信息，请通知该主管老师注册本系统或联系系统管理员。", "错误的用户信息", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-                        }
-                    }
-                    else
+                    //如果该物资当前被借出
+                    if (!stuff.State.Equals("Holding"))
                     {
                         MessageBox.Show("该物资当前处于借出状态，请先执行归还流程。", "删除失败", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                        return;
                     }
+
+                    User headTeacher = App.GetTeacherByLaboratory(user.Laboratory);
+
+                    //如果未查询到该实验室的主管老师
+                    if (null == headTeacher)
+                    {
+                        MessageBox.Show("未查询到主管老师的相关信息，请通知该主管老师注册本系统或联系系统管理员。", "错误的用户信息", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                        return;
+                    }
+
+                    RemoveStuffWindow removeStuffWindow = new RemoveStuffWindow(this, stuff, headTeacher, user);
+                    removeStuffWindow.Show();
                 }
             }
         }
@@ -95,15 +102,14 @@ namespace NISLTracker
         private void imgAddStuff_MouseUp(object sender, MouseButtonEventArgs e)
         {
             User headTeacher = App.GetTeacherByLaboratory(user.Laboratory);
-            if (null != headTeacher)
-            {
-                AddStuffWindow addStuffWindow = new AddStuffWindow(this, headTeacher, user);
-                addStuffWindow.Show();
-            }
-            else
+            if (null == headTeacher)
             {
                 MessageBox.Show("未查询到主管老师的相关信息，请通知该主管老师注册本系统或联系系统管理员。", "错误的用户信息", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                return;
             }
+
+            AddStuffWindow addStuffWindow = new AddStuffWindow(this, headTeacher, user);
+            addStuffWindow.Show();
         }
 
         /// <summary>
