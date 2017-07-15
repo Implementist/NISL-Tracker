@@ -46,6 +46,65 @@ namespace NISLTracker
             }
         }
 
+        public static int UpdateAuthCodeAndSecStampByUserName(string UserName, string AuthCode, string SecStamp)
+        {
+            MySqlConnection connection = null;
+            MySqlCommand command = null;
+            try
+            {
+                connection = DBManager.GetConnection();
+
+                StringBuilder sqlExpression = new StringBuilder();
+                sqlExpression.Append("UPDATE user SET ");
+                sqlExpression.Append("AuthorizationCode=@AuthorizationCode,SecurityStamp=@SecurityStamp ");
+                sqlExpression.Append("WHERE UserName=@UserName");
+
+                command = new MySqlCommand(sqlExpression.ToString(), connection);
+                command.Parameters.AddWithValue("@AuthorizationCode", AuthCode);
+                command.Parameters.AddWithValue("@SecurityStamp", SecStamp);
+                command.Parameters.AddWithValue("@UserName", UserName);
+
+                return command.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+            finally
+            {
+                DBManager.CloseAll(null, command, connection);
+            }
+        }
+
+        public static int UpdateIdentityByUserName(string UserName, string Identity)
+        {
+            MySqlConnection connection = null;
+            MySqlCommand command = null;
+            try
+            {
+                connection = DBManager.GetConnection();
+
+                StringBuilder sqlExpression = new StringBuilder();
+                sqlExpression.Append("UPDATE user SET ");
+                sqlExpression.Append("Identity=@Identity ");
+                sqlExpression.Append("WHERE UserName=@UserName");
+
+                command = new MySqlCommand(sqlExpression.ToString(), connection);
+                command.Parameters.AddWithValue("@Identity", Identity);
+                command.Parameters.AddWithValue("@UserName", UserName);
+
+                return command.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+            finally
+            {
+                DBManager.CloseAll(null, command, connection);
+            }
+        }
+
         /// <summary>
         /// 通过用户名查询用户信息
         /// </summary>

@@ -43,24 +43,24 @@ namespace NISLTracker
         private void btnRemoveStuff_Click(object sender, RoutedEventArgs e)
         {
             string ciphertext = Encrypt.GetCiphertext(txtHeadTeacherAuthorizationCode.Password, headTeacher.SecurityStamp);
-            if (ciphertext.Equals(headTeacher.AuthorizationCode))
+            if (!ciphertext.Equals(headTeacher.AuthorizationCode))
             {
-                int result = StuffDAO.DeleteStuff(stuff.StuffId);
-                if (result == 1)
-                {
-                    MessageBox.Show("物资删除成功！", "删除成功", MessageBoxButton.OK, MessageBoxImage.None);
-                    Close();
-                    parentWindow.UpdateDataGrid("Remove", null, null, null);
-                }
-                else
-                {
-                    MessageBox.Show("物资删除失败，请稍后重试。", "删除失败", MessageBoxButton.OK, MessageBoxImage.Error);
-                    Close();
-                }
+                MessageBox.Show("验证失败，请检查您的授权码是否正确并重试。", "验证失败", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+
+            }
+
+            int result = StuffDAO.DeleteStuff(stuff.StuffId);
+            if (result == 1)
+            {
+                MessageBox.Show("物资删除成功！", "删除成功", MessageBoxButton.OK, MessageBoxImage.None);
+                Close();
+                parentWindow.UpdateDataGrid("Remove", null, null, null);
             }
             else
             {
-                MessageBox.Show("验证失败，请检查您的授权码是否正确并重试。", "验证失败", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("物资删除失败，请稍后重试。", "删除失败", MessageBoxButton.OK, MessageBoxImage.Error);
+                Close();
             }
         }
     }

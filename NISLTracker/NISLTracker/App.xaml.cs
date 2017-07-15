@@ -20,6 +20,34 @@ namespace NISLTracker
             Users = UserDAO.QueryAll();
         }
 
+        public static void InsertUser(User User)
+        {
+            Users.Add(User);
+        }
+
+        public static void UpdateAuthCodeAndSecStampByUserName(string UserName, string AuthCode, string SecStamp)
+        {
+            foreach (User user in Users)
+            {
+                if (user.UserName.Equals(UserName))
+                { 
+                    user.AuthorizationCode = AuthCode;
+                    user.SecurityStamp = SecStamp;
+                }
+            }
+        }
+
+        public static void UpdateIdentityByUserName(string UserName, string Identity)
+        {
+            foreach (User user in Users)
+            {
+                if (user.UserName.Equals(UserName))
+                {
+                    user.Identity = Identity;
+                }
+            }
+        }
+
         public static User GetUserByUserName(string UserName)
         {
             foreach(User user in Users)
@@ -35,6 +63,16 @@ namespace NISLTracker
             foreach (User user in Users)
             {
                 if (user.Identity.Equals("Teacher") && user.Laboratory == Laboratory)
+                    return user;
+            }
+            return null;
+        }
+        
+        public static User GetManager()
+        {
+            foreach (User user in Users)
+            {
+                if (user.Identity.Equals("Manager"))
                     return user;
             }
             return null;
