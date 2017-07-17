@@ -37,7 +37,7 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <TextBox x:Name="txtSearchInput" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="20" VerticalContentAlignment="Center" FontWeight="Bold" TabIndex="1"/>
-            <Button x:Name="btnSearch" Content="搜索" Grid.Column="2" HorizontalAlignment="Stretch" Margin="5,0,0,0" VerticalAlignment="Center" Height="34" FontSize="16" FontWeight="Bold" IsDefault="True" TabIndex="2"/>
+            <Button x:Name="btnSearch" Content="搜索" Grid.Column="2" HorizontalAlignment="Stretch" Margin="5,0,0,0" VerticalAlignment="Center" Height="34" FontSize="16" FontWeight="Bold" IsDefault="True" TabIndex="2" Click="btnSearch_Click"/>
             <Image x:Name="imgAddStuff" Grid.Column="4" Height="25" Width="25" Source="Source/add.png" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10" Cursor="Hand" MouseUp="imgAddStuff_MouseUp" Visibility="Hidden"/>
         </Grid>
         <DataGrid x:Name="dgrdStuffInfo" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="3" VerticalAlignment="Stretch"
