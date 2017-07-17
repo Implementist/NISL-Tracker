@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NISLTracker"
         mc:Ignorable="d"
-        Title="借入物资" Height="315" Width="420" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="Window_Loaded">
+        Title="借入物资" Height="315" Width="420" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="Window_Loaded" Topmost="True" Closed="Window_Closed">
     <Window.Background>
         <ImageBrush ImageSource="Source/background.jpg"/>
     </Window.Background>
@@ -33,7 +33,7 @@
             <Label Grid.Row="2" Content="拥有者：" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left" Foreground="#FFFFFFFF" FontWeight="Bold" FontSize="16" Margin="10,0,0,0"/>
             <TextBox x:Name="txtOwner" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="" VerticalAlignment="Center" FontSize="16" IsEnabled="False" Margin="0,0,10,0"/>
             <Label Grid.Row="3" Content="拥有者授权码：" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left" Foreground="#FFFFFFFF" FontWeight="Bold" FontSize="16" Margin="10,0,0,0"/>
-            <PasswordBox x:Name="txtOwnerAuthorizationCode" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" Password="" VerticalAlignment="Center" FontSize="18" Margin="0,0,10,0" TabIndex="1"/>
+            <PasswordBox x:Name="txtOwnerAuthCode" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" Password="" VerticalAlignment="Center" FontSize="18" Margin="0,0,10,0" TabIndex="1"/>
         </Grid>
         <Label Content="借入物资" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFFFFFFF" FontWeight="Bold" FontSize="20"/>
         <Button x:Name="btnBorrow" Content="借入" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch" FontSize="18" Margin="10,0,10,15" FontWeight="Bold" Click="btnBorrow_Click" IsDefault="True" TabIndex="2"/>

@@ -1,6 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿// ************************************************************************************
+//
+// 文件名(File Name):            Encrypt.cs
+//
+// 数据表(Tables):               None
+//
+// 作者(Author):                 曹帅(Implementist)
+//
+// 创建日期(Create Date):        2017年07月15日
+//
+// 修改记录(Revision History):   
+//
+// ************************************************************************************
+
+using System;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -25,7 +37,7 @@ namespace NISLTracker
         /// <summary>
         /// 获取一个随机的安全戳
         /// </summary>
-        /// <returns></returns>
+        /// <returns>一个随机的安全戳</returns>
         public static string GetSecurityStamp()
         {
             StringBuilder securityStamp = new StringBuilder();

@@ -43,11 +43,11 @@
                     <Border Grid.ColumnSpan="3" BorderThickness="1" BorderBrush="Gray"/>
                     <TextBox x:Name="txtUserName" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" AllowDrop="False" TabIndex="1" FontSize="18" VerticalContentAlignment="Center" BorderBrush="{x:Null}" BorderThickness="0,1" MaxLines="1" TextChanged="txtUserName_TextChanged"/>
                     <Border Grid.Row="1" Grid.ColumnSpan="3" BorderThickness="1" BorderBrush="Gray"/>
-                    <PasswordBox x:Name="txtAuthorizationCode" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" VerticalContentAlignment="Center" AllowDrop="False" TabIndex="2" FontSize="18" BorderBrush="{x:Null}" BorderThickness="0,1" PasswordChanged="txtAuthorizationCode_PasswordChanged"/>
+                    <PasswordBox x:Name="txtAuthCode" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" VerticalContentAlignment="Center" AllowDrop="False" TabIndex="2" FontSize="18" BorderBrush="{x:Null}" BorderThickness="0,1" PasswordChanged="txtAuthCode_PasswordChanged"/>
                     <Image HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="28" Source="Source/username.png" Margin="0,0,0,0"/>
                     <Image x:Name="imgClearUserName" Grid.Column="2" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" Width="20" Source="Source/clear.png" Margin="0,0,0,0" Visibility="Hidden" Cursor="Hand" MouseLeftButtonUp="imgClearUserName_MouseLeftButtonUp"/>
                     <Image Grid.Row="1" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="28" Source="Source/password.png" Margin="0,0,0,0"/>
-                    <Image x:Name="imgClearAuthorizationCode" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" Width="20" Source="Source/clear.png" Visibility="Hidden" MouseLeftButtonUp="imgClearAuthorizationCode_MouseLeftButtonUp" Cursor="Hand"/>
+                    <Image x:Name="imgClearAuthCode" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" Width="20" Source="Source/clear.png" Visibility="Hidden" MouseLeftButtonUp="imgClearAuthCode_MouseLeftButtonUp" Cursor="Hand"/>
                 </Grid>
                 <Button x:Name="btnLogin" Content="登录" Grid.Column="3" Grid.Row="1" TabIndex="3" BorderThickness="0" Cursor="Hand" FontSize="20" Click="btnLogin_Click" IsDefault="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button.Template>
