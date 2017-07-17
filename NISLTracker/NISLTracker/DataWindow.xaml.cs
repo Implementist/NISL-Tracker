@@ -65,6 +65,7 @@ namespace NISLTracker
                     BorrowWindow borrowWindow = new BorrowWindow(this, stuff, owner, user);
                     borrowWindow.Show();
                 }
+
                 //如果物资处于可还状态——即： 1.用户处于借入物资界面；
                 //2.该物资当前被借出； 3.该物资的当前持有者是当前用户。
                 else if ((bool)rdbBorrowedStuffs.IsChecked && stuff.State.Equals("LentOut") && stuff.CurrentHolder.Equals(user.UserName))
@@ -73,6 +74,7 @@ namespace NISLTracker
                     ReturnWindow returnWindow = new ReturnWindow(this, stuff, owner, user);
                     returnWindow.Show();
                 }
+
                 //如果物资处于可删除状态——即： 1.用户处于我的物资界面；
                 //2.该物资的拥有者不是当前用户。
                 else if ((bool)rdbMyStuffs.IsChecked && stuff.Owner.Equals(user.UserName))
@@ -130,19 +132,43 @@ namespace NISLTracker
                     break;
                 case "Return":
                 case "Remove":
-                    List<Stuff> stuffs = dgrdStuffInfo.ItemsSource as List<Stuff>;
+                    IList<Stuff> stuffs = dgrdStuffInfo.ItemsSource as List<Stuff>;
                     stuffs.RemoveAt(selectedIndex);
                     dgrdStuffInfo.ItemsSource = null;
                     dgrdStuffInfo.ItemsSource = stuffs;
                     break;
                 case "Add":
-                    List<Stuff> stuffsOfMine = dgrdStuffInfo.ItemsSource as List<Stuff>;
+                    IList<Stuff> stuffsOfMine = dgrdStuffInfo.ItemsSource as List<Stuff>;
                     Stuff.StuffId = StuffDAO.QueryMaxOfStuffId();
                     stuffsOfMine.Add(Stuff);
                     dgrdStuffInfo.ItemsSource = null;
                     dgrdStuffInfo.ItemsSource = stuffsOfMine;
                     break;
             }
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtSearchInput.Text.Equals(""))
+            {
+                MessageBox.Show("搜索文本不能为空！", "文本为空", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                return;
+            }
+
+            IList<Stuff> stuffs = dgrdStuffInfo.ItemsSource as List<Stuff>;
+            string input = txtSearchInput.Text;
+            IList<Stuff> searchResult = new List<Stuff>();
+
+            foreach(Stuff stuff in stuffs)
+            {
+                if (stuff.StuffName.Contains(input) || stuff.State.Equals(input) || stuff.Owner.Contains(input) || stuff.CurrentHolder.Contains(input))
+                    searchResult.Add(stuff);
+            }
+
+            dgrdStuffInfo.ItemsSource = null;
+            dgrdStuffInfo.ItemsSource = searchResult;
+
+            MessageBox.Show("共搜索到 " + searchResult.Count + " 条与 " + input + " 相关的物资信息", searchResult.Count + " 条搜索结果", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
