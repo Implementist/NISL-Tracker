@@ -224,5 +224,20 @@ namespace NISLTracker
             //显示注册窗口
             registerWindow.Show();
         }
+
+        /// <summary>
+        /// 窗口关闭事件的回调函数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            //如果各子窗口实例存在，关掉这些子窗口
+            if (null != resetAuthCodeWindow)
+                resetAuthCodeWindow.Close();
+
+            if (null != registerWindow)
+                registerWindow.Close();
+        }
     }
 }

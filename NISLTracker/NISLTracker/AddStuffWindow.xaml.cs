@@ -81,6 +81,7 @@ namespace NISLTracker
             {
                 MessageBox.Show("未查询到你所在实验室主管老师的账户信息，请先联系该老师注册本系统。", "主管老师不存在", MessageBoxButton.OK, MessageBoxImage.Information);
                 Close();
+                return;
             }
 
             //判断整数数值的正则表达式

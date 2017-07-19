@@ -75,6 +75,7 @@ namespace NISLTracker
                 {
                     MessageBox.Show("该用户已注册，请直接登录。", "已注册", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                     Close();
+                    return;
                 }
 
                 //如果两次输入不匹配

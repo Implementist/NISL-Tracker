@@ -66,6 +66,7 @@ namespace NISLTracker
                 {
                     MessageBox.Show("该用户不存在，请直接注册。", "用户不存在", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                     Close();
+                    return;
                 }
 
                 //如果两次输入不匹配
