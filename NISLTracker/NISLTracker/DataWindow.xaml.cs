@@ -316,5 +316,26 @@ namespace NISLTracker
 
             MessageBox.Show("共搜索到 " + searchResult.Count + " 条与 " + input + " 相关的物资信息", searchResult.Count + " 条搜索结果", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+        /// <summary>
+        /// 窗口关闭事件的回调函数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Closed(object sender, System.EventArgs e)
+        {
+            //如果各子窗口实例存在，关掉这些子窗口
+            if (null != borrowWindow)
+                borrowWindow.Close();
+
+            if (null != returnWindow)
+                returnWindow.Close();
+
+            if (null != addStuffWindow)
+                addStuffWindow.Close();
+
+            if (null != removeStuffWindow)
+                removeStuffWindow.Close();
+        }
     }
 }
